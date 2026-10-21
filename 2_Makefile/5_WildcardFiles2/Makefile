@@ -1,10 +1,17 @@
-DEBUG = 1
+###############
+## PATTERNS ##
+###############
 
-CXX_STANDARD = c++17
+DEBUG_MODE = 1
+
+DEBUG = 1
+EXECUTABLE_NAME = main
+
+CXX_STANDARD = c++17 # make build CXX_STANDARD=c++14
 CXX_WARNINGS = -Wall -Wextra -Wpedantic
+
 CXX = g++
 CXXFLAGS = $(CXX_WARNINGS) -std=$(CXX_STANDARD)
-LDFLAGS =
 
 ifeq ($(DEBUG), 1)
 CXXFLAGS += -g -O0
@@ -14,15 +21,14 @@ CXXFLAGS += -O3
 EXECUTABLE_NAME = mainRelease
 endif
 
-CXX_COMPILER_CALL = $(CXX) $(CXXFLAGS)
+CXX_COMPILER_CALL = $(CXX) $(CXXFLAGS) 
 
 CXX_SOURCES = $(wildcard *.cc)
+
+#patsubt: $(text:pattern=replacement) : thay thế chuỗi theo mẫu
 CXX_OBJECTS = $(patsubst %.cc, %.o, $(CXX_SOURCES))
 
-##############
-## TARGETS  ##
-##############
-build: $(CXX_OBJECTS)
+build: $(CXX_OBJECTS)	
 	$(CXX_COMPILER_CALL) $(CXX_OBJECTS) $(LDFLAGS) -o $(EXECUTABLE_NAME)
 
 execute:
@@ -32,8 +38,14 @@ clean:
 	rm -f *.o
 	rm -f $(EXECUTABLE_NAME)
 
-##############
+###############
 ## PATTERNS ##
-##############
-%.o: %.cc
+###############
+
+# $@: the file name of the target
+# $<: the name of the first ependency
+# $^: the names of all prerequisites
+
+%.o: %.cc # với mỗi file .cc tạo ra file .o tương ứng cùng tên
 	$(CXX_COMPILER_CALL) -c $< -o $@
+

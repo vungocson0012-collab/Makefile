@@ -1,6 +1,8 @@
 DEBUG ?= 1
 ENABLE_WARNINGS ?= 1
-WARNINGS_AS_ERRORS ?= 0
+WARNINGS_AS_ERRORS ?= 0		# gán giá trị mặc định nếu biến chưa được định nghĩa
+# có thể truyền khi chạy: make build DEBUG=0
+# hoặc qua biến môi trường: DEBUG=0 make build
 
 INCLUDE_DIR = include
 SOURCE_DIR = src
@@ -40,7 +42,9 @@ CXX_OBJECTS = $(patsubst $(SOURCE_DIR)/%.cc, $(BUILD_DIR)/%.o, $(CXX_SOURCES))
 all: create build
 
 create:
-	@mkdir -p build
+	# @ để ẩn dòng lệnh đầu ra
+	@mkdir -p build	# tránh lỗi khi dã có folder build
+	cd build @@ mkdir -p test  # liên kết 2 phiên terminal
 
 build: $(CXX_OBJECTS)
 	$(CXX_COMPILER_CALL) $(CXX_OBJECTS) $(LDFLAGS) -o $(BUILD_DIR)/$(EXECUTABLE_NAME)

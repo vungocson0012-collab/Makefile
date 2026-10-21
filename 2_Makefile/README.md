@@ -17,7 +17,7 @@
 - Produces: main.out (.exe for Windows)
 
 ### Compiler Flags
-
+ 
 - Debug: ```-g```
 - Release: ```-O0 -O1 -O2 -O3 -Og```
 - Includes: ```-I```

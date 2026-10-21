@@ -6,3 +6,10 @@ int main()
 
     return 0;
 }
+
+
+/*
+g++ main.cc -o main
+file main
+main: Mach-O 64-bit executable arm64
+*/

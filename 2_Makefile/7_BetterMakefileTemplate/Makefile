@@ -9,7 +9,7 @@ BUILD_DIR = build
 ifeq ($(ENABLE_WARNINGS), 1)
 CXX_WARNINGS = -Wall -Wextra -Wpedantic
 else
-CXX_WARNINGS =
+CXX_WARNINGS =		# để trống
 endif
 ifeq ($(WARNINGS_AS_ERRORS), 1)
 CXX_WARNINGS += -Werror
@@ -59,4 +59,6 @@ $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cc
 ###########
 ## PHONY ##
 ###########
+
+# Liệt kê các taget 
 .PHONY: create build execute clean
